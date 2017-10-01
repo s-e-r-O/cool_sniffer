@@ -9,6 +9,7 @@ int ether_reader(const u_char *bytes, bpf_u_int32 totalLength)
 {
 	
   printf("\n--------------- ETHERNET ---------------\n\n");
+  
 
   struct ether_header *headerEthernet = (struct ether_header *) bytes;
   
