@@ -9,6 +9,7 @@
 #include <netinet/udp.h>
 #include <arpa/inet.h>
 #include <ctype.h>
+#include <sys/cdefs.h>
 
 #define PORT_HTTP 80
 #define PORT_FTP 20
