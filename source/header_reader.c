@@ -75,11 +75,6 @@ int ipv6_reader(const u_char *bytes)
   	//printf("Destination: %s\n", inet_ntop(AF_INET6, *(headerIPv6->ip6_dst), NULL, INET6_ADDRSTRLEN));
 }
 
-int udp_reader(const u_char *bytes)
-{
-
-}
-
 int http_reader(const u_char *bytes)
 {
 
