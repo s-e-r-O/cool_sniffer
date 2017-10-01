@@ -10,6 +10,11 @@
 #include <arpa/inet.h>
 #include <ctype.h>
 
+#define PORT_HTTP 80
+#define PORT_FTP 20
+#define PORT_HTTPS 443
+#define PORT_SSH 22
+
 
 /* DATA LINK LAYER */
 int ether_reader(const u_char *bytes, bpf_u_int32 dataLength);
