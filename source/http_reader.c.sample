@@ -1,0 +1,12 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <pcap/pcap.h>
+
+#include "header_reader.h"
+
+//Waiting for latest changes from Eli-C to implement these
+
+int http_reader(const u_char *bytes)
+{
+
+}
