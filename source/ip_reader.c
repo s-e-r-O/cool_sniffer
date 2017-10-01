@@ -34,10 +34,10 @@ int ip_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHead
       icmp_reader(bytes + headerIP -> ip_hl * 4, totalLength);
       break;
     case IPPROTO_TCP:
-      tcp_reader(bytes + headerIP -> ip_hl * 4, totalLength, 0);
+      tcp_reader(bytes + headerIP -> ip_hl * 4, totalLength, (sumHeaderLength + (headerIP->ip_hl*4)));
       break;
     case IPPROTO_UDP:
-      udp_reader(bytes + headerIP -> ip_hl * 4, totalLength, 0);
+      udp_reader(bytes + headerIP -> ip_hl * 4, totalLength, (sumHeaderLength + (headerIP->ip_hl*4)));
       break;
   }
 }
