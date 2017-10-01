@@ -22,6 +22,7 @@ int ipv6_reader(const u_char *bytes, bpf_u_int32 totalLength);
 /* PROTOCOL LAYER */
 int tcp_reader(const u_char *bytes, bpf_u_int32 totalLength);
 int udp_reader(const u_char *bytes, bpf_u_int32 totalLength);
+int icmp_reader(const u_char *bytes, bpf_u_int32 totalLength);
 
 /* APP LAYER */
 int http_reader(const u_char *bytes, bpf_u_int32 totalLength);

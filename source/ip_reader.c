@@ -28,6 +28,9 @@ int ip_reader(const u_char *bytes, bpf_u_int32 totalLength)
 
   switch(headerIP->ip_p)
   {
+    case IPPROTO_ICMP:
+      icmp_reader(bytes + headerIP -> ip_hl * 4, totalLength);
+      break;
     case IPPROTO_TCP:
       tcp_reader(bytes + headerIP -> ip_hl * 4, totalLength);
       break;
