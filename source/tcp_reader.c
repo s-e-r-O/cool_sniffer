@@ -4,13 +4,14 @@
 
 #include "header_reader.h"
 
-int tcp_reader(const u_char *bytes)
+int tcp_reader(const u_char *bytes, bpf_u_int32 totalLength)
 {
 	struct tcphdr *headerTCP = (struct tcphdr *) bytes;
-	printf("Source Port: %u\n", headerTCP->th_sport);
-  printf("Destination Port: %u\n", headerTCP->th_dport);
-  printf("Sequence Number: %u\n", headerTCP->th_seq);
-  printf("Acknowledgment Number: %u\n", headerTCP->th_ack);
+	
+  printf("Source Port: %u\n", ntohs(headerTCP->th_sport));
+  printf("Destination Port: %u\n", ntohs(headerTCP->th_dport));
+  printf("Sequence Number: %u\n", ntohl(headerTCP->th_seq));
+  printf("Acknowledgment Number: %u\n", ntohl(headerTCP->th_ack));
   printf("Data Offset: %u\n", headerTCP->th_off);
   printf("Flags:\n");
   if (!headerTCP->th_flags) {
@@ -27,9 +28,9 @@ int tcp_reader(const u_char *bytes)
 	 			printf("Off\n");	
   	}
   }
-  printf("Window: %u\n", headerTCP->th_win);
-  printf("Checksum: %u\n", headerTCP->th_sum);
-  printf("Urgent Pointer: %u\n", headerTCP->th_urp);
+  printf("Window: %u\n", ntohs(headerTCP->th_win));
+  printf("Checksum: %u\n", ntohs(headerTCP->th_sum));
+  printf("Urgent Pointer: %u\n", ntohs(headerTCP->th_urp));
 
   //SEND TO AN APLICATION LAYER FUNCTION THE NEXT PARAMETER (bytes + headerTCP -> th_off * 4);
 }	
