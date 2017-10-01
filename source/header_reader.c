@@ -4,11 +4,7 @@
 
 #include "header_reader.h"
 
-
-
-
-
-int ether_reader(const u_char *bytes, unsignet int totalLength)
+int ether_reader(const u_char *bytes, bpf_u_int32 totalLength)
 {
 	struct ether_header *headerEthernet = (struct ether_header *) bytes;
   
@@ -22,21 +18,21 @@ int ether_reader(const u_char *bytes, unsignet int totalLength)
   	{
     	case ETHERTYPE_IP:
     			printf("\nETHERTYPE:	IP\n");
-				ip_reader(bytes + sizeof(*headerEthernet));
+				ip_reader(bytes + sizeof(*headerEthernet), totalLength);
     	break;
     	case ETHERTYPE_ARP:
     			printf("\nETHERTYPE:	ARP\n");
-				arp_reader(bytes + sizeof(*headerEthernet));
+				arp_reader(bytes + sizeof(*headerEthernet), totalLength);
       	break;
     	case ETHERTYPE_IPV6:
     			printf("\nETHERTYPE:	IPv6\n");
-				ipv6_reader(bytes + sizeof(*headerEthernet));
+				ipv6_reader(bytes + sizeof(*headerEthernet), totalLength);
       	break;
     }
 }
 
 
-int ip_reader(const u_char *bytes)
+int ip_reader(const u_char *bytes, bpf_u_int32 totalLength)
 {
 	struct ip *headerIP = (struct ip *) bytes;
   
@@ -60,23 +56,23 @@ int ip_reader(const u_char *bytes)
 	{
 		case IPPROTO_TCP:
 				printf("\nPROTOCOL Inside Of The IP Is:	 TCP\n");
-	    		tcp_reader(bytes + headerIP -> ip_hl * 4);
+	    		tcp_reader(bytes + headerIP -> ip_hl * 4, totalLength);
 	    break;
 	    case IPPROTO_UDP:
 	    		printf("\nPROTOCOL Inside Of The IP Is:	 UDP\n");
-	    		udp_reader(bytes + headerIP -> ip_hl * 4);
+	    		udp_reader(bytes + headerIP -> ip_hl * 4, totalLength);
 	    break;
 	}
 
 }
 
-int arp_reader(const u_char *bytes)
+int arp_reader(const u_char *bytes, bpf_u_int32 totalLength)
 {
 
 
 }
 
-int ipv6_reader(const u_char *bytes)
+int ipv6_reader(const u_char *bytes, bpf_u_int32 totalLength)
 {
 	struct ip6_hdr *headerIPv6 = (struct ip6_hdr *) bytes;
 
@@ -85,7 +81,7 @@ int ipv6_reader(const u_char *bytes)
 }
 
 
-int tcp_reader(const u_char *bytes)
+int tcp_reader(const u_char *bytes, bpf_u_int32 totalLength)
 {
 	struct tcphdr *headerTCP = (struct tcphdr *) bytes;
 
@@ -100,10 +96,10 @@ int tcp_reader(const u_char *bytes)
 	printf("Checksum: %u\n", ntohs(headerTCP->th_sum));
 	printf("Urgent Pointer: %u\n", ntohs(headerTCP->th_urp));
 
-	http_reader(bytes + headerTCP->th_off * 4);
+	http_reader(bytes + headerTCP->th_off * 4, totalLength);
 }
 
-int udp_reader(const u_char *bytes)
+int udp_reader(const u_char *bytes, bpf_u_int32 totalLength)
 {
 	struct udphdr *headerUDP = (struct udphdr *) bytes;
 
@@ -112,19 +108,20 @@ int udp_reader(const u_char *bytes)
 	printf("UDP Length: %u\n", ntohs(headerUDP->uh_ulen));
 	printf("Checksum: %u\n", ntohs(headerUDP->uh_sum));
 
-	http_reader(bytes + headerUDP->uh_ulen);
+	http_reader(bytes + headerUDP->uh_ulen, totalLength);
 }
 
 
-int http_reader(const u_char *bytes)
+int http_reader(const u_char *bytes, bpf_u_int32 totalLength)
 {
-	int i = 0;
+	/*int i = 0;
 
-	unsignet int aux;
+	bpf_u_int32 aux;
 	aux = totalLength - (sizeof(headerEthernet))
 	for (i; i < ; ++i)
 	{
-		/* code */
+		// code 
 	}
 	printf("El mensaje es: %c");
+  */
 }
