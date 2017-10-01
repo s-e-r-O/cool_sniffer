@@ -52,5 +52,5 @@ int tcp_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHea
 
   //SEND TO AN APLICATION LAYER FUNCTION THE NEXT PARAMETER (bytes + headerTCP -> th_off * 4);
 
-  http_reader(bytes + headerTCP->th_off*4, totalLength, sumHeaderLength + headerTCP->th_off*4);
+  http_reader(bytes + headerTCP->th_off*4, totalLength, (sumHeaderLength + headerTCP->th_off*4));
 }	

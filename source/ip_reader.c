@@ -28,11 +28,11 @@ int ip_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHead
     {
       case IPPROTO_TCP:
           printf("\nPROTOCOL Inside Of The IP Is:  TCP\n");
-            tcp_reader(bytes + headerIP -> ip_hl * 4, totalLength, sumHeaderLength + headerIP->ip_hl);
+            tcp_reader(bytes + headerIP -> ip_hl * 4, totalLength, (sumHeaderLength + (headerIP->ip_hl*4)));
         break;
         case IPPROTO_UDP:
             printf("\nPROTOCOL Inside Of The IP Is:  UDP\n");
-            udp_reader(bytes + headerIP -> ip_hl * 4, totalLength, sumHeaderLength + headerIP->ip_hl);
+            udp_reader(bytes + headerIP -> ip_hl * 4, totalLength, sumHeaderLength + headerIP->ip_hl*4);
         break;
     }
 

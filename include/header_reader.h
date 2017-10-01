@@ -8,7 +8,7 @@
 #include <netinet/tcp.h>
 #include <netinet/udp.h>
 #include <arpa/inet.h>
-
+#include <ctype.h>
 
 
 /* DATA LINK LAYER */
