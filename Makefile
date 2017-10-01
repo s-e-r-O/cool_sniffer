@@ -2,7 +2,7 @@ CC = gcc
 IDIR = ./include
 CFLAGS = -I$(IDIR) -std=gnu99
 LIBS = lpcap
-OBJ = main.c ./src/*.c
+OBJ = main.c ./source/*.c
 DEPS = $(IDIR)/*
 
 sniffer: $(OBJ)
