@@ -10,6 +10,7 @@
 #include <arpa/inet.h>
 
 
+
 /* DATA LINK LAYER */
 int ether_reader(const u_char *bytes);
 
