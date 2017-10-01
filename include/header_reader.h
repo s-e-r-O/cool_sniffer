@@ -12,18 +12,18 @@
 
 
 /* DATA LINK LAYER */
-int ether_reader(const u_char *bytes);
+int ether_reader(const u_char *bytes, bpf_u_int32 totalLength);
 
 /* NETWORK LAYER */
-int ip_reader(const u_char *bytes);
-int arp_reader(const u_char *bytes);
-int ipv6_reader(const u_char *bytes);
+int ip_reader(const u_char *bytes, bpf_u_int32 totalLength);
+int arp_reader(const u_char *bytes, bpf_u_int32 totalLength);
+int ipv6_reader(const u_char *bytes, bpf_u_int32 totalLength);
 
 /* PROTOCOL LAYER */
-int tcp_reader(const u_char *bytes);
-int udp_reader(const u_char *bytes);
+int tcp_reader(const u_char *bytes, bpf_u_int32 totalLength);
+int udp_reader(const u_char *bytes, bpf_u_int32 totalLength);
 
 /* APP LAYER */
-int http_reader(const u_char *bytes);
+int http_reader(const u_char *bytes, bpf_u_int32 totalLength);
 
 
