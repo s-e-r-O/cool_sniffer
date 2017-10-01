@@ -10,6 +10,7 @@ int ip_reader(const u_char *bytes, bpf_u_int32 dataLength)
   printf("\n------------------ IP ------------------\n\n");
 
 
+  //printf("Data Length: %u\n", dataLength);
   struct ip *headerIP = (struct ip *) bytes;
   
   printf("Version: %u\n", headerIP->ip_v);

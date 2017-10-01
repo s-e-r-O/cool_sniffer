@@ -8,6 +8,7 @@ int tcp_reader(const u_char *bytes, bpf_u_int32 dataLength)
 {
   printf("\n----------------- TCP ------------------\n\n");
 
+  //printf("Data Length: %u\n", dataLength);
 	struct tcphdr *headerTCP = (struct tcphdr *) bytes;
 	
   printf("Source Port: %u\n", ntohs(headerTCP->th_sport));

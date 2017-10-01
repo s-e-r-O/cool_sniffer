@@ -16,6 +16,7 @@
 int main(int nargs, char* args[])
 {
     char errbuf[PCAP_ERRBUF_SIZE];
+    printf("Looking up for devices...\n");
     char *device = pcap_lookupdev(errbuf); 
 
 //printf("El tamano del header de ether es: %d\n", sizeof(struct ether_header));
@@ -26,6 +27,8 @@ int main(int nargs, char* args[])
       exit(1);
     }
     
+    printf("Opening %s...\n", device);
+
     pcap_t* p = pcap_open_live(device, BUFSIZ, 1, 5000, errbuf);   //EL BUFSIZ ES EL NUMERO MAX DE BYTES QUE QUEREMOS CAPTURAR
  
     if (p == NULL) 
@@ -33,6 +36,8 @@ int main(int nargs, char* args[])
       perror(errbuf);
       exit(-1);
     }
+
+    printf("Starting to capture...\n");
       
     pcap_loop(p, -1, pcap_callback, NULL);   //devuelve 0 si ha leido el numero de paquetes especificado en el segundo parametro y un numero neg si hubo error
   

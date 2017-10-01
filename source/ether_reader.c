@@ -10,7 +10,7 @@ int ether_reader(const u_char *bytes, bpf_u_int32 dataLength)
 	
   printf("\n--------------- ETHERNET ---------------\n\n");
 
-
+  //printf("Data Length: %u\n", dataLength);
   struct ether_header *headerEthernet = (struct ether_header *) bytes;
   
   printf("MAC Destination:  %s\n", ether_ntoa((struct ether_addr *) headerEthernet->ether_dhost));
@@ -21,15 +21,12 @@ int ether_reader(const u_char *bytes, bpf_u_int32 dataLength)
   switch(ntohs(headerEthernet->ether_type))
   {
     case ETHERTYPE_IP:
-      printf("\nETHERTYPE:  IP\n");
       ip_reader(bytes + sizeof(*headerEthernet), dataLength - sizeof(*headerEthernet));
       break;
     case ETHERTYPE_ARP:
-      printf("\nETHERTYPE:  ARP\n");
       arp_reader(bytes + sizeof(*headerEthernet), dataLength - sizeof(*headerEthernet));
       break;
     case ETHERTYPE_IPV6:
-      printf("\nETHERTYPE:  IPv6\n");
       ipv6_reader(bytes + sizeof(*headerEthernet), dataLength - sizeof(*headerEthernet));
       break;
   }
