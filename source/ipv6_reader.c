@@ -4,9 +4,8 @@
 
 #include "header_reader.h"
 
-//Waiting for latest changes from Eli-C to implement these
 
-int ipv6_reader(const u_char *bytes, bpf_u_int32 totalLength)
+int ipv6_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHeaderLength)
 {
 	struct ip6_hdr *headerIPv6 = (struct ip6_hdr *) bytes;
 
