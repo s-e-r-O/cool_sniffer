@@ -9,7 +9,9 @@ void pcap_callback(u_char * user, const struct pcap_pkthdr *h, const u_char *byt
 {
     
 	static int count = 1;
-    printf("\nCount: %d\tCaplen: %u\tLen: %u\n", count, h->caplen, h->len);
+	printf("\n========================================\n\n");
+    printf("Count: %d\nCaplen: %u\nLen: %u\n", count, h->caplen, h->len);
+    
     count++;
 
     if ((h->caplen) == (h->len))
