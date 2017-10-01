@@ -4,16 +4,17 @@
 
 #include "header_reader.h"
 
-int http_reader(const u_char *bytes, bpf_u_int32 totalLength)
+int http_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHeaderLength)
 {
-	/*int i = 0;
+	int i = 0;
 
 	bpf_u_int32 aux;
-	aux = totalLength - (sizeof(headerEthernet))
-	for (i; i < ; ++i)
+	aux = totalLength - sumHeaderLength;
+
+	/*while (aux > 0)
 	{
-		// code 
-	}
-	printf("El mensaje es: %c");
-  */
+		printf("El mensaje es: %c", bytes); 
+		bytes = bytes + 1;
+		i = i-1;
+	}*/
 }
