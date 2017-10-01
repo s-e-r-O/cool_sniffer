@@ -80,38 +80,6 @@ int ipv6_reader(const u_char *bytes, bpf_u_int32 totalLength)
   	//printf("Destination: %s\n", inet_ntop(AF_INET6, *(headerIPv6->ip6_dst), NULL, INET6_ADDRSTRLEN));
 }
 
-
-int tcp_reader(const u_char *bytes, bpf_u_int32 totalLength)
-{
-	struct tcphdr *headerTCP = (struct tcphdr *) bytes;
-
-	printf("Source Port: %u\n", ntohs(headerTCP->th_sport));
-	printf("Destinaton Port: %u\n", ntohs(headerTCP->th_dport));
-	printf("Sequence Number: %u\n", ntohl(headerTCP->th_seq));
-	printf("Acknowledgment Number: %u\n", ntohl(headerTCP->th_ack));
-	printf("Data Offset: %u\n", headerTCP->th_off);
-	//printf("Reserved: %u\n", headerTCP->th_ack);
-	printf("Flags: %u\n", headerTCP->th_flags);
-	printf("Window Size: %u\n", ntohs(headerTCP->th_win));
-	printf("Checksum: %u\n", ntohs(headerTCP->th_sum));
-	printf("Urgent Pointer: %u\n", ntohs(headerTCP->th_urp));
-
-	http_reader(bytes + headerTCP->th_off * 4, totalLength);
-}
-
-int udp_reader(const u_char *bytes, bpf_u_int32 totalLength)
-{
-	struct udphdr *headerUDP = (struct udphdr *) bytes;
-
-	printf("Source Port: %u\n", ntohs(headerUDP->uh_sport));
-	printf("Destinaton Port: %u\n", ntohs(headerUDP->uh_dport));
-	printf("UDP Length: %u\n", ntohs(headerUDP->uh_ulen));
-	printf("Checksum: %u\n", ntohs(headerUDP->uh_sum));
-
-	http_reader(bytes + headerUDP->uh_ulen, totalLength);
-}
-
-
 int http_reader(const u_char *bytes, bpf_u_int32 totalLength)
 {
 	/*int i = 0;
