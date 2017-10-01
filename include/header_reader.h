@@ -12,19 +12,19 @@
 
 
 /* DATA LINK LAYER */
-int ether_reader(const u_char *bytes, bpf_u_int32 totalLength);
+int ether_reader(const u_char *bytes, bpf_u_int32 dataLength);
 
 /* NETWORK LAYER */
-int ip_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHeaderLength);
-int arp_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHeaderLength);
-int ipv6_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHeaderLength);
+int ip_reader(const u_char *bytes, bpf_u_int32 dataLength);
+int arp_reader(const u_char *bytes, bpf_u_int32 dataLength);
+int ipv6_reader(const u_char *bytes, bpf_u_int32 dataLength);
 
 /* PROTOCOL LAYER */
-int tcp_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHeaderLength);
-int udp_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHeaderLength);
-int icmp_reader(const u_char *bytes, bpf_u_int32 totalLength);
+int tcp_reader(const u_char *bytes, bpf_u_int32 dataLength);
+int udp_reader(const u_char *bytes, bpf_u_int32 dataLength);
+int icmp_reader(const u_char *bytes, bpf_u_int32 dataLength);
 
 /* APP LAYER */
-int http_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHeaderLength);
+int http_reader(const u_char *bytes, bpf_u_int32 dataLength);
 
 

@@ -4,7 +4,7 @@
 
 #include "header_reader.h"
 
-int tcp_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHeaderLength)
+int tcp_reader(const u_char *bytes, bpf_u_int32 dataLength)
 {
   printf("\n----------------- TCP ------------------\n\n");
 
@@ -52,7 +52,5 @@ int tcp_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHea
   printf("Checksum: %u\n", ntohs(headerTCP->th_sum));
   printf("Urgent Pointer: %u\n", ntohs(headerTCP->th_urp));
 
-  //SEND TO AN APLICATION LAYER FUNCTION THE NEXT PARAMETER (bytes + headerTCP -> th_off * 4);
-
-  http_reader(bytes + headerTCP->th_off*4, totalLength, (sumHeaderLength + headerTCP->th_off*4));
+  http_reader(bytes + headerTCP->th_off*4, dataLength - headerTCP->th_off*4);
 }	

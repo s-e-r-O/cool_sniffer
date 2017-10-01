@@ -4,7 +4,7 @@
 
 #include "header_reader.h"
 
-int ip_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHeaderLength)
+int ip_reader(const u_char *bytes, bpf_u_int32 dataLength)
 {
 
   printf("\n------------------ IP ------------------\n\n");
@@ -31,13 +31,13 @@ int ip_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHead
   switch(headerIP->ip_p)
   {
     case IPPROTO_ICMP:
-      icmp_reader(bytes + headerIP -> ip_hl * 4, totalLength);
+      icmp_reader(bytes + headerIP -> ip_hl * 4, dataLength - (headerIP->ip_hl*4));
       break;
     case IPPROTO_TCP:
-      tcp_reader(bytes + headerIP -> ip_hl * 4, totalLength, (sumHeaderLength + (headerIP->ip_hl*4)));
+      tcp_reader(bytes + headerIP -> ip_hl * 4, dataLength - (headerIP->ip_hl*4));
       break;
     case IPPROTO_UDP:
-      udp_reader(bytes + headerIP -> ip_hl * 4, totalLength, (sumHeaderLength + (headerIP->ip_hl*4)));
+      udp_reader(bytes + headerIP -> ip_hl * 4, dataLength - (headerIP->ip_hl*4));
       break;
   }
 }

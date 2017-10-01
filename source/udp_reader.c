@@ -4,7 +4,7 @@
 
 #include "header_reader.h"
 
-int udp_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHeaderLength)
+int udp_reader(const u_char *bytes, bpf_u_int32 dataLength)
 {
   printf("\n----------------- UDP ------------------\n\n");
 
@@ -15,8 +15,5 @@ int udp_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHea
   printf("Length: %u\n", ntohs(headerUDP->uh_ulen));
   printf("Checksum: %u\n", ntohs(headerUDP->uh_sum));
 
-  // SEND TO AN APLICATION LAYER FUNCTION THE NEXT PARAMETERS 
-  // (bytes + headerUDP -> uh_ulen, totalLength);
-
-  http_reader(bytes + headerUDP->uh_ulen, totalLength, sumHeaderLength + headerUDP->uh_ulen);
+  http_reader(bytes + headerUDP->uh_ulen, dataLength - headerUDP->uh_ulen);
 }

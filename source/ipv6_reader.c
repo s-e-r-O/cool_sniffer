@@ -5,7 +5,7 @@
 #include "header_reader.h"
 
 
-int ipv6_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHeaderLength)
+int ipv6_reader(const u_char *bytes, bpf_u_int32 dataLength)
 {
 	struct ip6_hdr *headerIPv6 = (struct ip6_hdr *) bytes;
 

@@ -4,7 +4,7 @@
 
 #include "header_reader.h"
 
-int arp_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHeaderLength)
+int arp_reader(const u_char *bytes, bpf_u_int32 dataLength)
 {
 
 

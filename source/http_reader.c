@@ -5,23 +5,18 @@
 
 #include "header_reader.h"
 
-int http_reader(const u_char *bytes, bpf_u_int32 totalLength, unsigned int sumHeaderLength)
+int http_reader(const u_char *bytes, bpf_u_int32 dataLength)
 {
-	int i = 0;
+	printf("\n----------------- HTTP -----------------\n\n");
 
-	unsigned int aux;
-	aux = totalLength - sumHeaderLength;
+	int i;
+	printf("El mensaje es:%u\n", dataLength);
 
-	printf("El mensaje es:%u\n",aux);
-
-	while (aux > 0)
+	for (i=0; i < 10; i++)
 	{
 		if(isprint(bytes[i]))
 		{
 			printf("%c", bytes[i]); 
 		}
-
-		i++;
-		aux--;
 	}
 }
