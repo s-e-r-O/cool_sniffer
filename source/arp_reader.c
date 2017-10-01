@@ -4,9 +4,7 @@
 
 #include "header_reader.h"
 
-//Waiting for latest changes from Eli-C to implement these
-
-int arp_reader(const u_char *bytes)
+int arp_reader(const u_char *bytes, bpf_u_int32 totalLength)
 {
 
 
