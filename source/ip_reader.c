@@ -4,7 +4,7 @@
 
 #include "header_reader.h"
 
-int ip_reader(const u_char *bytes)
+int ip_reader(const u_char *bytes, bpf_u_int32 totalLength)
 {
 	 struct ip *headerIP = (struct ip *) bytes;
   
@@ -28,11 +28,11 @@ int ip_reader(const u_char *bytes)
     {
       case IPPROTO_TCP:
           printf("\nPROTOCOL Inside Of The IP Is:  TCP\n");
-            tcp_reader(bytes + headerIP -> ip_hl * 4);
+            tcp_reader(bytes + headerIP -> ip_hl * 4, totalLength);
         break;
         case IPPROTO_UDP:
             printf("\nPROTOCOL Inside Of The IP Is:  UDP\n");
-            udp_reader(bytes + headerIP -> ip_hl * 4);
+            udp_reader(bytes + headerIP -> ip_hl * 4, totalLength);
         break;
     }
 
