@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <pcap/pcap.h>
+#include <netinet/ip.h>
 
 #include "header_reader.h"
 
@@ -8,9 +9,7 @@ int ip_reader(const u_char *bytes, bpf_u_int32 dataLength)
 {
 
   printf("\n------------------ IP ------------------\n\n");
-
-
-  //printf("Data Length: %u\n", dataLength);
+  
   struct ip *headerIP = (struct ip *) bytes;
   
   printf("Version: %u\n", headerIP->ip_v);
@@ -18,12 +17,17 @@ int ip_reader(const u_char *bytes, bpf_u_int32 dataLength)
   printf("Type Of Service: %u\n", headerIP->ip_tos);
   printf("Size Of Datagram Or Total Length: %u\n", headerIP->ip_len);
   printf("Identification Tag: %u\n", headerIP->ip_id);
-  /*printf("Flag1: %x\n", headerIP->IP_RF);   // reserved bit
-  printf("Flag2: %x\n", headerIP->IP_DF);   // don't fragment
-  printf("Flag3: %x\n", headerIP->IP_MF);   // more fragments
-  printf("Flag4: %x\n", headerIP->IP_OFFMASK);  */    
-  printf("Fragment Offset: %u\n", headerIP->ip_off);
-  printf("Time To Live TTL: %u\n", headerIP->ip_ttl);
+  printf("Flags:\n");
+  if ((headerIP->ip_off & 0xD000) & IP_DF)
+    printf("\tDon't Fragment\n");
+  else
+    printf("\tMay Fragment\n");
+  if ((headerIP->ip_off & 0xD000) & IP_MF)
+    printf("\tMore Fragments\n");
+  else
+    printf("\tLast Fragment\n");   
+  printf("Fragment Offset: %u\n", headerIP->ip_off & IP_OFFMASK);
+  printf("Time To Live: %u\n", headerIP->ip_ttl);
   printf("Protocol: %u\n", headerIP->ip_p);
   printf("Header Checksum: %u\n", headerIP->ip_sum);
   printf("Source Address:   %s\n", inet_ntoa(headerIP->ip_src));
