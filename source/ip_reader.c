@@ -1,7 +1,5 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <pcap/pcap.h>
 #include <netinet/ip.h>
+#include <netinet/in.h>
 
 #include "header_reader.h"
 
@@ -15,8 +13,8 @@ int ip_reader(const u_char *bytes, bpf_u_int32 dataLength)
   printf("Version: %u\n", headerIP->ip_v);
   printf("Internet Header Length: %u\n", headerIP->ip_hl);
   printf("Type Of Service: %u\n", headerIP->ip_tos);
-  printf("Size Of Datagram Or Total Length: %u\n", headerIP->ip_len);
-  printf("Identification Tag: %u\n", headerIP->ip_id);
+  printf("Total Length: %u\n", ntohs(headerIP->ip_len));
+  printf("Identification: %u\n", ntohs(headerIP->ip_id));
   printf("Flags:\n");
   if ((headerIP->ip_off & 0xD000) & IP_DF)
     printf("\tDon't Fragment\n");

@@ -1,6 +1,5 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <pcap/pcap.h>
+#include <net/ethernet.h>
+#include <netinet/ether.h>
 
 #include "header_reader.h"
 
@@ -10,7 +9,6 @@ int ether_reader(const u_char *bytes, bpf_u_int32 dataLength)
 	
   printf("\n--------------- ETHERNET ---------------\n\n");
 
-  //printf("Data Length: %u\n", dataLength);
   struct ether_header *headerEthernet = (struct ether_header *) bytes;
   
   printf("MAC Destination:  %s\n", ether_ntoa((struct ether_addr *) headerEthernet->ether_dhost));

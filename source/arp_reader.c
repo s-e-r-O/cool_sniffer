@@ -1,6 +1,3 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <pcap/pcap.h>
 #include <net/if_arp.h>
 
 #include "header_reader.h"

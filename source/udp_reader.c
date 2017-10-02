@@ -1,5 +1,3 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include <netinet/udp.h>
 
 #include "header_reader.h"
