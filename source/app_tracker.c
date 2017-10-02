@@ -8,9 +8,14 @@
 enum {
   PORT_FTP = 20,
   PORT_SSH = 22,
+  PORT_DNS = 53,
+  PORT_BOOTPS = 67,
+  PORT_BOOTPC = 68,
   PORT_HTTP = 80,
+  PORT_NTP = 123,
   PORT_HTTPS = 443,
   PORT_SMB = 445,
+  PORT_RDP = 3389,
   PORT_MDNS = 5353
 };
 
@@ -41,5 +46,25 @@ int app_tracker(u_int16_t port, char** dataTitle)
       printf("\tMulticast DNS (mDNS).\n");
       *dataTitle = "mDNS";
       break;
+    case PORT_RDP:
+      printf("\tRemote Desktop Protocol (RDP).\n");
+      *dataTitle = "RDP";
+      break;
+    case PORT_NTP:
+      printf("\tNetwork Time Protocol (NTP).\n");
+      *dataTitle = "NTP";
+      break;
+    case PORT_DNS:
+      printf("\tDomain Name System (DNS).\n");
+      *dataTitle = "DNS";
+      break;
+    case PORT_BOOTPS:
+      printf("\tBootstrap Protocol (BOOTP) server.\n");
+      *dataTitle = "BOOTP";
+      break;
+    case PORT_BOOTPC:
+      printf("\tBootstrap Protocol (BOOTP) client.\n");
+      *dataTitle = "BOOTP";
+      break;      
   }
 }
