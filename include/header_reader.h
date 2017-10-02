@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <pcap/pcap.h>
 #include <net/ethernet.h>
+#include <net/if_arp.h>
 #include <netinet/in.h>
 #include <netinet/ether.h>
 #include <netinet/ip.h>
@@ -9,7 +10,7 @@
 #include <netinet/udp.h>
 #include <arpa/inet.h>
 #include <ctype.h>
-#include <linux/netdevice.h>
+
 
 #define PORT_HTTP 80
 #define PORT_FTP 20
