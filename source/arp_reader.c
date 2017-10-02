@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <pcap/pcap.h>
-#include <sys/cdefs.h>
+#include <linux/netdevice.h>
 
 #include "header_reader.h"
 
