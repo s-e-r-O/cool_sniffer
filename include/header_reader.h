@@ -11,13 +11,6 @@
 #include <arpa/inet.h>
 #include <ctype.h>
 
-
-#define PORT_HTTP 80
-#define PORT_FTP 20
-#define PORT_HTTPS 443
-#define PORT_SSH 22
-
-
 /* DATA LINK LAYER */
 int ether_reader(const u_char *bytes, bpf_u_int32 dataLength);
 
@@ -32,6 +25,7 @@ int udp_reader(const u_char *bytes, bpf_u_int32 dataLength);
 int icmp_reader(const u_char *bytes, bpf_u_int32 dataLength);
 
 /* APP LAYER */
-int http_reader(const u_char *bytes, bpf_u_int32 dataLength);
+int app_tracker(u_int16_t port, char** dataTitle);
+int data_reader(const u_char *bytes, bpf_u_int32 dataLength, const char* dataTitle);
 
 

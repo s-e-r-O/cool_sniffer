@@ -11,31 +11,12 @@ int tcp_reader(const u_char *bytes, bpf_u_int32 dataLength)
   //printf("Data Length: %u\n", dataLength);
 	struct tcphdr *headerTCP = (struct tcphdr *) bytes;
 	
+  char *dataTitle = "DATA";
   printf("Source Port: %u\n", ntohs(headerTCP->th_sport));
+  app_tracker(ntohs(headerTCP->th_sport), &dataTitle);
   printf("Destination Port: %u\n", ntohs(headerTCP->th_dport));
+  app_tracker(ntohs(headerTCP->th_dport), &dataTitle);
   
-  u_int32_t app_port;
-
-  if(ntohs(headerTCP->th_dport) == PORT_FTP || ntohs(headerTCP->th_sport == PORT_FTP))
-  {
-    printf("\tFile Transfer Protocol (FTP).\n");
-    app_port = PORT_FTP;
-  }
-  else if(ntohs(headerTCP->th_dport) == PORT_HTTP || ntohs(headerTCP->th_sport == PORT_HTTP))
-  {
-    printf("\tHypertext Transfer Protocol (HTTP).\n");
-    app_port = PORT_HTTP;
-  }
-  else if(ntohs(headerTCP->th_dport) == PORT_HTTPS || ntohs(headerTCP->th_sport == PORT_HTTPS))
-  {
-    printf("\tHypertext Transfer Protocol (HTTPS).\n");
-    app_port = PORT_HTTPS;
-  }
-  else if(ntohs(headerTCP->th_dport) == PORT_SSH || ntohs(headerTCP->th_sport == PORT_SSH))
-  {
-    printf("\tSecure Shell (SSH).\n");
-    app_port = PORT_SSH;
-  }
 
   printf("Sequence Number: %u\n", ntohl(headerTCP->th_seq));
   printf("Acknowledgment Number: %u\n", ntohl(headerTCP->th_ack));
@@ -62,20 +43,9 @@ int tcp_reader(const u_char *bytes, bpf_u_int32 dataLength)
   printf("Window: %u\n", ntohs(headerTCP->th_win));
   printf("Checksum: %u\n", ntohs(headerTCP->th_sum));
   printf("Urgent Pointer: %u\n", ntohs(headerTCP->th_urp));
-  switch(app_port)
-  {
-    case PORT_FTP:
-      //ftp_reader(bytes + headerTCP->th_off*4, dataLength - headerTCP->th_off*4);
-      break;
-    case PORT_HTTP:
-      http_reader(bytes + headerTCP->th_off*4, dataLength - headerTCP->th_off*4);
-      break;
-    case PORT_HTTPS:
-      //https_reader(bytes + headerTCP->th_off*4, dataLength - headerTCP->th_off*4);
-      break;
-    case PORT_SSH:
-      //ssh_reader(bytes + headerTCP->th_off*4, dataLength - headerTCP->th_off*4);
-      break;
-  }
   
+  if (dataLength > headerTCP->th_off*4)
+  {
+    data_reader(bytes + headerTCP->th_off*4, dataLength - headerTCP->th_off*4, dataTitle);
+  }
 }	
