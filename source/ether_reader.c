@@ -3,6 +3,7 @@
 
 #include "header_reader.h"
 
+/* IEEE Standard for Ethernet -> http://standards.ieee.org/getieee802/download/802.3-2012_section1.pdf */
 
 int ether_reader(const u_char *bytes, bpf_u_int32 dataLength)
 {
@@ -14,7 +15,6 @@ int ether_reader(const u_char *bytes, bpf_u_int32 dataLength)
   printf("MAC Destination:  %s\n", ether_ntoa((struct ether_addr *) headerEthernet->ether_dhost));
   printf("MAC Source: %s\n", ether_ntoa((struct ether_addr *) headerEthernet->ether_shost));
   printf("Ether Type: 0x%04x\n", ntohs(headerEthernet->ether_type));  
-
 
   switch(ntohs(headerEthernet->ether_type))
   {

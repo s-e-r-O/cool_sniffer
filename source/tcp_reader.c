@@ -2,14 +2,16 @@
 
 #include "header_reader.h"
 
+/* RFC793 -> https://tools.ietf.org/html/rfc793 */
+
 int tcp_reader(const u_char *bytes, bpf_u_int32 dataLength)
 {
   printf("\n----------------- TCP ------------------\n\n");
 
-  //printf("Data Length: %u\n", dataLength);
 	struct tcphdr *headerTCP = (struct tcphdr *) bytes;
 	
   char *dataTitle = "DATA";
+
   printf("Source Port: %u\n", ntohs(headerTCP->th_sport));
   app_tracker(ntohs(headerTCP->th_sport), &dataTitle);
   printf("Destination Port: %u\n", ntohs(headerTCP->th_dport));
@@ -20,6 +22,7 @@ int tcp_reader(const u_char *bytes, bpf_u_int32 dataLength)
   printf("Acknowledgment Number: %u\n", ntohl(headerTCP->th_ack));
   printf("Data Offset: %u\n", headerTCP->th_off);
   printf("Flags:\n");
+
   if (!headerTCP->th_flags) 
   {
   	printf("\tNone\n");
@@ -38,6 +41,7 @@ int tcp_reader(const u_char *bytes, bpf_u_int32 dataLength)
 	 			printf("Off\n");	
   	}
   }
+
   printf("Window: %u\n", ntohs(headerTCP->th_win));
   printf("Checksum: %u\n", ntohs(headerTCP->th_sum));
   printf("Urgent Pointer: %u\n", ntohs(headerTCP->th_urp));

@@ -19,5 +19,3 @@ int icmp_reader(const u_char *bytes, bpf_u_int32 dataLength);
 /* APP LAYER */
 int app_tracker(u_int16_t port, char** dataTitle);
 int data_reader(const u_char *bytes, bpf_u_int32 dataLength, const char* dataTitle);
-
-

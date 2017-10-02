@@ -1,10 +1,8 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <pcap/pcap.h>
-#include <ctype.h>
-
 #include "header_reader.h"
 
+/* https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.txt */
+
+/* Some of the most frequent (and not so frequent) */
 enum {
   PORT_FTP = 20,
   PORT_SSH = 22,

@@ -2,6 +2,9 @@
 
 #include "header_reader.h"
 
+/* RFC792 -> https://tools.ietf.org/html/rfc792 */
+
+/* Different messages depending of Type property of the ICMP Header */
 void prepare_msg_array(char* type_msg[]);
 
 int icmp_reader(const u_char *bytes, bpf_u_int32 totalLength)
@@ -27,9 +30,9 @@ int icmp_reader(const u_char *bytes, bpf_u_int32 totalLength)
       break;
   }
 
-  //SEND TO AN APLICATION LAYER FUNCTION THE NEXT PARAMETER (bytes + headerTCP -> th_off * 4);
 }	
 
+/* Different messages depending of Type property of the ICMP Header */
 void prepare_msg_array(char* type_msg[])
 {
   type_msg[ICMP_ECHOREPLY] = "Echo Reply";

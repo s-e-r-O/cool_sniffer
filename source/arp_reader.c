@@ -2,10 +2,11 @@
 
 #include "header_reader.h"
 
+/* RFC826 -> https://tools.ietf.org/html/rfc826 */
+
 int arp_reader(const u_char *bytes, bpf_u_int32 dataLength)
 {
 	printf("\n------------------ ARP ------------------\n\n");
-
 
   	struct arphdr *headerARP = (struct arphdr *) bytes;
 

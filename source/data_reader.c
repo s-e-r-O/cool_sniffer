@@ -8,10 +8,9 @@ int data_reader(const u_char *bytes, bpf_u_int32 dataLength, const char* dataTit
   int i;
   for (i=0; i < dataLength; i++)
   {
-	printf("%02X ", bytes[i]); 
-	if (!((i+1) % 13))
+	  printf("%02X ", bytes[i]); 
+	  if (!((i+1) % 13))
       printf("\n "); 
-		
   }
   printf("\n"); 	
 }

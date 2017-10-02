@@ -5,6 +5,7 @@
 
 #include "header_reader.h"
 
+/* Print timeval struct in for humans */
 void print_time(struct timeval tv);
 
 void pcap_callback(u_char * user, const struct pcap_pkthdr *h, const u_char *bytes)
@@ -25,6 +26,7 @@ void pcap_callback(u_char * user, const struct pcap_pkthdr *h, const u_char *byt
       
 }
 
+/* Print timeval struct in for humans */
 void print_time(struct timeval tv){
 	time_t time;
 	struct tm *local_time;
